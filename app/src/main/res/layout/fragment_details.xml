@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailsFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:menu="@menu/details"
+        app:navigationIcon="@drawable/ic_arrow_back_"
+        app:title="Details"
+        app:titleTextColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/repoName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:maxLines="2"
+            android:textSize="25sp"
+            tools:text="RepoName" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repoName"
+            android:maxLines="5"
+            android:layout_marginTop="5dp"
+            android:textColor="#403F3F"
+            android:textSize="20sp"
+            tools:text="hbcsjjsncsaskk" />
+
+    </RelativeLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/relLayout"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnBranch"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:text="Branches"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            app:cornerRadius="-2dp"-->
+<!--            app:rippleColor="#7E7E7E"-->
+<!--            app:strokeWidth="1dp" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnIssues"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:text="Issues"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="20sp"-->
+<!--            app:cornerRadius="-2dp"-->
+<!--            app:rippleColor="#7E7E7E"-->
+<!--            app:strokeWidth="1dp" />-->
+
+<!--    </LinearLayout>-->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabBackground="@drawable/border"
+        app:tabTextColor="@color/black"
+        android:layout_below="@+id/relLayout"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabLayout"/>
+
+</RelativeLayout>

@@ -1,0 +1,2 @@
+rootProject.name = "Repo Tracker"
+include ':app'
