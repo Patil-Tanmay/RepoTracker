@@ -1,7 +1,10 @@
 package com.tanmay.repotracker.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
@@ -46,6 +49,24 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 1 -> tab.text = "Issues"
             }
         }.attach()
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.deleteRepo ->{
+                    // TODO: 1/14/2022 delete repo
+                    Toast.makeText(context,"Yet To be Implemented",Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.visitRepo -> {
+                    val url = "https://github.com/$fullName"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
+                    true
+                }
+                else ->{true}
+            }
+        }
 
     }
 
