@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Reactions(
     @param:JsonProperty("+1")
-    val PLUS : Int,
+    val PLUS : Int?=null,
     @param:JsonProperty("-1")
-    val MINUS : Int,
+    val MINUS : Int?=null,
     val confused: Int,
     val eyes: Int,
     val heart: Int,

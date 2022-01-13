@@ -5,7 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.tanmay.repotracker.R
 import com.tanmay.repotracker.databinding.FragmentAddRepoBinding
@@ -31,7 +33,7 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
         binding.apply {
             btnAdd.setOnClickListener {
                 if (!ownerName.text.isNullOrEmpty() && !repoName.text.isNullOrEmpty()) {
-                    pBar.visibility= View.VISIBLE
+                    pBar.visibility = View.VISIBLE
                     viewmodel.checkRepo(ownerName.text.toString(), repoName.text.toString())
                 } else {
                     Toast.makeText(context, "Empty Credentials", Toast.LENGTH_SHORT).show()
@@ -41,31 +43,43 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            launch {
-                viewmodel.isRepoExists.collect {
-                    when (it) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewmodel.isRepoExists.collect {
+                        when (it) {
 //                        is Resource.Loading -> true
-                        is Resource.Success -> {
-                            findNavController().navigate(AddRepoFragmentDirections.actionAddRepoFragmentToReposFragment())
-                        }
+                            is Resource.Success<*> -> {
+                                findNavController().navigate(AddRepoFragmentDirections.actionAddRepoFragmentToReposFragment())
+                            }
 
-                        is Resource.Failure -> {
-                            binding.pBar.visibility= View.GONE
-                            Toast.makeText(context, "Failed To fetch the repo OR Repo Already Exists", Toast.LENGTH_LONG)
-                                .show()
-                        }
+                            is Resource.Failure -> {
+                                binding.pBar.visibility = View.GONE
+                                Toast.makeText(
+                                    context,
+                                    "Failed To fetch the repo OR Repo Already Exists",
+                                    Toast.LENGTH_LONG
+                                )
+                                    .show()
+                            }
 
-                        is Resource.Error -> {
-                            binding.pBar.visibility= View.GONE
-                            Toast.makeText(context, "${it.throwable}", Toast.LENGTH_SHORT).show()
-                        }
+                            is Resource.Error -> {
+                                binding.pBar.visibility = View.GONE
+                            }
 
-                        else -> {}
+                            else -> {
+                            }
+                        }
+                    }
+
+                }
+
+                launch {
+                    viewmodel.error.collect {
+                        Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-
 
     }
 

@@ -46,5 +46,28 @@
             android:name="description"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_detailsFragment_to_commitsFragment2"
+            app:destination="@id/commitsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/commitsFragment2"
+        android:name="com.tanmay.repotracker.ui.CommitsFragment"
+        android:label="CommitsFragment" >
+        <argument
+            android:name="branchName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_commitsFragment2_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+        <argument
+            android:name="fullName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/branchFragment"
+        android:name="com.tanmay.repotracker.ui.BranchFragment"
+        android:label="BranchFragment" >
+
     </fragment>
 </navigation>

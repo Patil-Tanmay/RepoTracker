@@ -31,4 +31,18 @@ class BranchViewModel @Inject constructor(
         }
     }
 
+    fun getIssues(fullName: String) = flow {
+        try {
+            val splitFullName = fullName.split("/")
+            val response = api.getIssues(splitFullName[0],splitFullName[1])
+            if (!response.isNullOrEmpty()){
+                emit(response)
+            }else{
+                emit(response)
+            }
+        }catch (e :Exception){
+            _exception.send(e)
+        }
+    }
+
 }

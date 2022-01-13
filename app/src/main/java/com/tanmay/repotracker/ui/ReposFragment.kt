@@ -11,7 +11,9 @@ import android.widget.Toolbar
 import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tanmay.repotracker.R
@@ -55,10 +57,14 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
             val shareIntent = Intent.createChooser(sendIntent, "Share Link")
             startActivity(shareIntent)
         },
-        rootOnClick = {
-            val action = ReposFragmentDirections.actionReposFragmentToDetailsFragment(it.full_name,it.name,it.description)
-            findNavController().navigate(action)
-        })
+            rootOnClick = {
+                val action = ReposFragmentDirections.actionReposFragmentToDetailsFragment(
+                    it.full_name,
+                    it.name,
+                    it.description
+                )
+                findNavController().navigate(action)
+            })
 
         binding.btnAddRepo.setOnClickListener {
             val action = ReposFragmentDirections.actionReposFragmentToAddRepoFragment()
@@ -66,36 +72,40 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
         }
         binding.apply {
             viewLifecycleOwner.lifecycleScope.launch {
-                launch {
-                    viewModel.repoDataStatus.collect {
-                        when (it) {
-                            is Resource.Loading -> {
-                                pBar.visibility = View.VISIBLE
-                                addRepo.visibility = View.GONE
-                                recView.visibility = View.GONE
-                            }
-                            is Resource.Failure -> {
-                                pBar.visibility = View.GONE
-                                addRepo.visibility = View.VISIBLE
-                                recView.visibility = View.GONE
-                            }
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    launch {
+                        viewModel.repoDataStatus.collect {
+                            when (it) {
+                                is Resource.Loading -> {
+                                    pBar.visibility = View.VISIBLE
+                                    addRepo.visibility = View.GONE
+                                    recView.visibility = View.GONE
+                                }
+                                is Resource.Failure -> {
+                                    pBar.visibility = View.GONE
+                                    addRepo.visibility = View.VISIBLE
+                                    recView.visibility = View.GONE
+                                }
 
-                            is Resource.Success -> {
-                                pBar.visibility = View.GONE
-                                addRepo.visibility = View.GONE
-                                recView.visibility = View.VISIBLE
-                            }
+                                is Resource.Success<*> -> {
+                                    pBar.visibility = View.GONE
+                                    addRepo.visibility = View.GONE
+                                    recView.visibility = View.VISIBLE
+                                }
 
-                            else -> {}
+                                else -> {
+                                }
+                            }
                         }
                     }
-                }
 
-                launch {
-                    viewModel.getReposData().collect {
-                        adapter.differ.submitList(it)
-                        recView.adapter = adapter
-                        recView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                    launch {
+                        viewModel.getReposData().collect {
+                            adapter.differ.submitList(it)
+                            recView.adapter = adapter
+                            recView.layoutManager =
+                                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                        }
                     }
                 }
             }

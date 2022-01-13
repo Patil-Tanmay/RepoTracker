@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/border">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:text="sjkdcnjkdcjknsjkkdmkldls"
+        android:layout_margin="3dp"/>
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/imgView"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:backgroundTint = "@color/white"-->
+<!--        tools:src="@mipmap/ic_launcher"-->
+<!--        android:layout_below="@+id/title"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>-->
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:backgroundTint = "@color/white"
+        tools:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/title"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_toEndOf="@+id/imgView"
+        android:layout_marginStart="4dp"
+        tools:text="jjcsbj"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

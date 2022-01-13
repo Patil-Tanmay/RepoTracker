@@ -1,10 +1,19 @@
 package com.tanmay.repotracker.utils
 
-sealed class Resource(
-    val throwable: Throwable? = null
-) {
-    class Success() : Resource()
-    class Loading : Resource()
-    class Failure : Resource()
-    class Error(t : Throwable) : Resource(t)
+sealed class Resource{
+    data class Success<T>(val data: T?) : Resource()
+    object Loading : Resource()
+    object Failure : Resource()
+    data class Error(val t : Throwable?) : Resource()
 }
+
+//object States{
+//    fun loading(): Resource = Resource.Loading
+//
+//    fun failure(): Resource = Resource.Failure
+//
+//    fun error(error: Throwable): Resource.Error =
+//        Resource.Error(error)
+//
+//    fun <T> success(data: T): Resource.Success<T> = Resource.Success(data)
+//}

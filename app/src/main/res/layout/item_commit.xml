@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/border_no_padding">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="10 March 2021" />
+
+        <TextView
+            android:id="@+id/commitId"
+            android:maxLength="15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#A7EAA9"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="commitIDjdnckkkdkkdkk" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/commitMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout"
+        android:layout_margin="5dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:text="hfbdjsbjc" />
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/commitMessage"
+        android:layout_margin="5dp"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imgView"
+        tools:text="jjscnksnj"
+        android:textColor="@color/black"
+        android:layout_below="@+id/commitMessage"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:layout_marginStart="2dp"/>
+
+</RelativeLayout>

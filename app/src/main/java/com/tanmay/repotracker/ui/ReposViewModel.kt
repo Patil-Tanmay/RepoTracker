@@ -22,17 +22,17 @@ class ReposViewModel @Inject constructor(
      * Success -> RepoData is not empty stage
      */
 
-    private val _repoDataStatus = MutableStateFlow<Resource>(Resource.Loading())
+    private val _repoDataStatus = MutableStateFlow<Resource>(Resource.Loading)
     val repoDataStatus : StateFlow<Resource> = _repoDataStatus
 
 
     fun getReposData() = flow{
         val repos = db.repoDao().getAllRepos()
         if (repos.isNullOrEmpty()){
-            _repoDataStatus.value = Resource.Failure()
+            _repoDataStatus.value = Resource.Failure
             emit(repos)
         }else{
-            _repoDataStatus.value = Resource.Success()
+            _repoDataStatus.value = Resource.Success(repos)
             emit(repos)
         }
     }

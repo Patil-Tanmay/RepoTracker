@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavArgs
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tanmay.repotracker.R
@@ -14,10 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
-    private var _binding : FragmentDetailsBinding?=null
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
 
-    private val args:DetailsFragmentArgs by navArgs()
+    private val args: DetailsFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,17 +32,29 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.description.text = description
         binding.repoName.text = name
 
-        val adapter = fullName?.let { ViewPagerAdapter(this, it) }
+        val adapter = fullName?.let { fullName ->
+            ViewPagerAdapter(this, fullName, onBranchClick = { bName->
+                navigateToCommitsFrag(bName,fullName)
+            })
+        }
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            when(position){
-                0-> {
+            when (position) {
+                0 -> {
                     tab.text = "Branches"
                 }
-                1-> tab.text = "Issues"
+                1 -> tab.text = "Issues"
             }
         }.attach()
 
+    }
+
+    private fun navigateToCommitsFrag(Bname :String?, fullName :String){
+        if (Bname!=null ){
+            val action =
+                DetailsFragmentDirections.actionDetailsFragmentToCommitsFragment2(Bname, fullName)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroy() {
