@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.CommitsFrag
 
 import androidx.lifecycle.ViewModel
 import com.tanmay.repotracker.api.GithubApi
@@ -28,7 +28,7 @@ class CommitsViewModel @Inject constructor(
             val response = api.getCommits(fullNameSplit[0],fullNameSplit[1],branchName)
             if (!response.isNullOrEmpty()){
                 emit(response)
-                _progress.send(Resource.Success(response))
+                _progress.send(Resource.Success)
             }else{
                 _progress.send(Resource.Failure)
                 emit(response)

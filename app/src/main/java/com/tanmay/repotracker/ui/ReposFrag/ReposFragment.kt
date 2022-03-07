@@ -1,14 +1,8 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.ReposFrag
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import android.widget.Toolbar
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -87,7 +81,7 @@ class ReposFragment : Fragment(R.layout.fragment_repos) {
                                     recView.visibility = View.GONE
                                 }
 
-                                is Resource.Success<*> -> {
+                                is Resource.Success -> {
                                     pBar.visibility = View.GONE
                                     addRepo.visibility = View.GONE
                                     recView.visibility = View.VISIBLE

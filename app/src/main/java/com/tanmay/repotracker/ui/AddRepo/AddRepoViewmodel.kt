@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.AddRepo
 
 import android.view.View
 import android.widget.Toast
@@ -37,7 +37,7 @@ class AddRepoViewmodel @Inject constructor(
         viewModelScope.launch {
             repository.getData(owner,repoName).collect {
                 when(it){
-                    is Resource.Success<*> -> {
+                    is Resource.Success -> {
                         _isRepoExists.value = it
                     }
 

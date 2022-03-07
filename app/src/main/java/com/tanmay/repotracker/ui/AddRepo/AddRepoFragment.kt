@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.AddRepo
 
 import android.os.Bundle
 import android.view.View
@@ -33,7 +33,7 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
         binding.apply {
             btnAdd.setOnClickListener {
                 if (!ownerName.text.isNullOrEmpty() && !repoName.text.isNullOrEmpty()) {
-                    pBar.visibility = View.VISIBLE
+                    setLoaderVisibility(true)
                     viewmodel.checkRepo(ownerName.text.toString(), repoName.text.toString())
                 } else {
                     Toast.makeText(context, "Empty Credentials", Toast.LENGTH_SHORT).show()
@@ -48,12 +48,12 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
                     viewmodel.isRepoExists.collect {
                         when (it) {
 //                        is Resource.Loading -> true
-                            is Resource.Success<*> -> {
+                            is Resource.Success -> {
                                 findNavController().navigate(AddRepoFragmentDirections.actionAddRepoFragmentToReposFragment())
                             }
 
                             is Resource.Failure -> {
-                                binding.pBar.visibility = View.GONE
+                                setLoaderVisibility(false)
                                 Toast.makeText(
                                     context,
                                     "Failed To fetch the repo OR Repo Already Exists",
@@ -63,7 +63,7 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
                             }
 
                             is Resource.Error -> {
-                                binding.pBar.visibility = View.GONE
+                                setLoaderVisibility(false)
                             }
 
                             else -> {
@@ -81,6 +81,18 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
             }
         }
 
+    }
+
+    private fun setLoaderVisibility(status: Boolean){
+        binding.apply {
+            if (status) {
+                LoaderView.greyScale.visibility = View.VISIBLE
+                LoaderView.pBar.visibility = View.VISIBLE
+            }else{
+                LoaderView.greyScale.visibility = View.GONE
+                LoaderView.pBar.visibility = View.GONE
+            }
+        }
     }
 
     override fun onDestroy() {

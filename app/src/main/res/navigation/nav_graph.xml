@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/reposFragment"
-        android:name="com.tanmay.repotracker.ui.ReposFragment"
+        android:name="com.tanmay.repotracker.ui.ReposFrag.ReposFragment"
         android:label="fragment_repos"
         tools:layout="@layout/fragment_repos">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/addRepoFragment"
-        android:name="com.tanmay.repotracker.ui.AddRepoFragment"
+        android:name="com.tanmay.repotracker.ui.AddRepo.AddRepoFragment"
         android:label="fragment_add_repo"
         tools:layout="@layout/fragment_add_repo">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.tanmay.repotracker.ui.DetailsFragment"
+        android:name="com.tanmay.repotracker.ui.DetailsFrag.DetailsFragment"
         android:label="DetailsFragment">
         <action
             android:id="@+id/action_detailsFragment_to_reposFragment"
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/commitsFragment2"
-        android:name="com.tanmay.repotracker.ui.CommitsFragment"
+        android:name="com.tanmay.repotracker.ui.CommitsFrag.CommitsFragment"
         android:label="CommitsFragment" >
         <argument
             android:name="branchName"
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/branchFragment"
-        android:name="com.tanmay.repotracker.ui.BranchFragment"
+        android:name="com.tanmay.repotracker.ui.Branch.BranchFragment"
         android:label="BranchFragment" >
 
     </fragment>

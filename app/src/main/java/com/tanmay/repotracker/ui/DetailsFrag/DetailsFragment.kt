@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.DetailsFrag
 
 import android.content.Intent
 import android.net.Uri
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator

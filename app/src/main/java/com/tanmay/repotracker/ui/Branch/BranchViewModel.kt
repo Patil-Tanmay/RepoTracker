@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.Branch
 
 import androidx.lifecycle.ViewModel
 import com.tanmay.repotracker.api.GithubApi

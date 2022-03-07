@@ -25,7 +25,7 @@ class Repository @Inject constructor(
                         emit(Resource.Failure)
                     } else {
                         dao.insertRepo(repoData)
-                        emit(Resource.Success(repoData))
+                        emit(Resource.Success)
                     }
                 }
             } else if (response.code() == GithubApi.STATUS_NOT_FOUND) {

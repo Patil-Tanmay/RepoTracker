@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.ReposFrag
 
 import androidx.lifecycle.ViewModel
 import com.tanmay.repotracker.api.GithubApi
@@ -32,7 +32,7 @@ class ReposViewModel @Inject constructor(
             _repoDataStatus.value = Resource.Failure
             emit(repos)
         }else{
-            _repoDataStatus.value = Resource.Success(repos)
+            _repoDataStatus.value = Resource.Success
             emit(repos)
         }
     }

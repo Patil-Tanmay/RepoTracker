@@ -2,7 +2,7 @@ package com.tanmay.repotracker.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tanmay.repotracker.ui.BranchFragment
+import com.tanmay.repotracker.ui.Branch.BranchFragment
 
 
 class ViewPagerAdapter(

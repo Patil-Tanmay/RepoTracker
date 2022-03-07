@@ -1,7 +1,7 @@
 package com.tanmay.repotracker.utils
 
 sealed class Resource{
-    data class Success<T>(val data: T?) : Resource()
+    object Success: Resource()
     object Loading : Resource()
     object Failure : Resource()
     data class Error(val t : Throwable?) : Resource()

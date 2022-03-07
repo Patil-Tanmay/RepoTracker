@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.CommitsFrag
 
 import android.os.Bundle
 import android.view.View
@@ -59,7 +59,7 @@ class CommitsFragment : Fragment(R.layout.fragment_commits) {
                 launch {
                     viewModel.progress.collect {
                         when (it) {
-                            is Resource.Success<*> -> {
+                            is Resource.Success -> {
                                 binding.recView.visibility = View.VISIBLE
                                 binding.pBar.visibility = View.GONE
                             }

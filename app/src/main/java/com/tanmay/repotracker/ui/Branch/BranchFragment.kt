@@ -1,4 +1,4 @@
-package com.tanmay.repotracker.ui
+package com.tanmay.repotracker.ui.Branch
 
 import android.os.Bundle
 import android.util.Log
