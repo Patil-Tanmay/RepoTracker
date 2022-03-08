@@ -40,7 +40,13 @@ class CommitsFragment : Fragment(R.layout.fragment_commits) {
             recView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             recView.adapter = adapter
+
+            toolbar.setNavigationOnClickListener {
+                activity?.onBackPressed()
+            }
         }
+
+
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

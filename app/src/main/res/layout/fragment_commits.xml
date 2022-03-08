@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:navigationIcon="@drawable/ic_arrow_back_"
-        app:title="Commits"
-        tools:subtitle="branchName"
         app:subtitleTextColor="@color/white"
-        app:titleTextColor="@color/white" />
+        app:title="Commits"
+        app:titleTextColor="@color/white"
+        tools:subtitle="branchName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recView"

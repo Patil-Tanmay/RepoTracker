@@ -31,46 +31,53 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         _binding = FragmentDetailsBinding.bind(view)
 
-        binding.description.text = description
-        binding.repoName.text = name
+        binding.apply {
+            this.description.text = description
+            repoName.text = name
 
-        val adapter = fullName?.let { fullName ->
-            ViewPagerAdapter(this, fullName, onBranchClick = { bName->
-                navigateToCommitsFrag(bName,fullName)
-            })
-        }
-        binding.viewPager.adapter = adapter
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = "Branches"
-                }
-                1 -> tab.text = "Issues"
+            val adapter = fullName?.let { fullName ->
+                ViewPagerAdapter(this@DetailsFragment, fullName, onBranchClick = { bName ->
+                    navigateToCommitsFrag(bName, fullName)
+                })
             }
-        }.attach()
-
-        binding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.deleteRepo ->{
-                    // TODO: 1/14/2022 delete repo
-                    Toast.makeText(context,"Yet To be Implemented",Toast.LENGTH_SHORT).show()
-                    true
+            viewPager.adapter = adapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                when (position) {
+                    0 -> {
+                        tab.text = "Branches"
+                    }
+                    1 -> tab.text = "Issues"
                 }
+            }.attach()
 
-                R.id.visitRepo -> {
-                    val url = "https://github.com/$fullName"
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    startActivity(intent)
-                    true
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.deleteRepo -> {
+                        // TODO: 1/14/2022 delete repo
+                        Toast.makeText(context, "Yet To be Implemented", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    R.id.visitRepo -> {
+                        val url = "https://github.com/$fullName"
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                        true
+                    }
+                    else -> {
+                        true
+                    }
                 }
-                else ->{true}
+            }
+
+            toolbar.setNavigationOnClickListener {
+                activity?.onBackPressed()
             }
         }
-
     }
 
-    private fun navigateToCommitsFrag(Bname :String?, fullName :String){
-        if (Bname!=null ){
+    private fun navigateToCommitsFrag(Bname: String?, fullName: String) {
+        if (Bname != null) {
             val action =
                 DetailsFragmentDirections.actionDetailsFragmentToCommitsFragment2(Bname, fullName)
             findNavController().navigate(action)

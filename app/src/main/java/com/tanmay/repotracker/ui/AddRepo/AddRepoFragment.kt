@@ -34,10 +34,14 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
             btnAdd.setOnClickListener {
                 if (!ownerName.text.isNullOrEmpty() && !repoName.text.isNullOrEmpty()) {
                     setLoaderVisibility(true)
-                    viewmodel.checkRepo(ownerName.text.toString(), repoName.text.toString())
+                    viewmodel.checkRepo(ownerName.text.toString().removeTrails(), repoName.text.toString().removeTrails())
                 } else {
                     Toast.makeText(context, "Empty Credentials", Toast.LENGTH_SHORT).show()
                 }
+            }
+
+            toolbar.setNavigationOnClickListener {
+                activity?.onBackPressed()
             }
         }
 
@@ -47,7 +51,6 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
                 launch {
                     viewmodel.isRepoExists.collect {
                         when (it) {
-//                        is Resource.Loading -> true
                             is Resource.Success -> {
                                 findNavController().navigate(AddRepoFragmentDirections.actionAddRepoFragmentToReposFragment())
                             }
@@ -83,14 +86,22 @@ class AddRepoFragment : Fragment(R.layout.fragment_add_repo) {
 
     }
 
+    fun String.removeTrails(): String{
+        return this.replace("\\s".toRegex(),"")
+    }
+
     private fun setLoaderVisibility(status: Boolean){
         binding.apply {
             if (status) {
-                LoaderView.greyScale.visibility = View.VISIBLE
-                LoaderView.pBar.visibility = View.VISIBLE
+                LoaderView.root.visibility = View.VISIBLE
+                ownerName.isEnabled = false
+                repoName.isEnabled = false
+                btnAdd.isEnabled = false
             }else{
-                LoaderView.greyScale.visibility = View.GONE
-                LoaderView.pBar.visibility = View.GONE
+                LoaderView.root.visibility = View.GONE
+                ownerName.isEnabled = true
+                repoName.isEnabled = true
+                btnAdd.isEnabled = true
             }
         }
     }
